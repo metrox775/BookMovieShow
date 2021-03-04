@@ -183,14 +183,14 @@ if(isset($_POST["login"]))
        $data = array("movie_name" => $moviename , "theater_name" => $theatername, "timing" => $movietiming,"username"=> $_SESSION["username"],"phone"=>152,"booking_seat"=>$seat,"total_seat"=>$totalseat);
 
       $bookData =  $md->insert($conn, $data, "booking_info");
-      // if($bookData != null)
-      // {
-      //     echo "<script>alert('Tickets are booked.');</script>";
-      // }  
-      // else{
+      if($bookData != null)
+      {
+          echo "<script>alert('Tickets are booked.');</script>";
+      }  
+      else{
 
-      //   echo "<script>alert('Tickets are not booked.');</script>";
-      // }
+        echo "<script>alert('Tickets are not booked.');</script>";
+      }
 
     }
 
