@@ -3,15 +3,17 @@
         // error_reporting(E_ALL);
         include '../Database/Controller.php';
 
-        $movie_name = array_column($array,'movie_name');
-
+        $id = array_column($userdata, 'id');
+        $email = array_column($userdata, 'email');
+        $phone = array_column($userdata, 'phone');
+        $password = array_column($userdata, 'password');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | Add Theater</title>
+  <title>Admin | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -35,96 +37,19 @@
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
-
-  <?php
-
-    include("master.php");
-  ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Add Theater</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+  <div class="container">
+    <div class="row">
+        <h2>Import File</h2>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <form method="post" enctype="multipart/form-data">
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label for="exampleInputEmail1">Enter Theater Name</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Theater Name" name="theatername">
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label for="exampleInputEmail1">Select Movie</label>
-              <select class="form-control form-select" aria-label="Default select example" name="selectmovie">
-                
-                <option selected>Select Movie</option>
-                <?php 
-                
-                for($i=0;$i<sizeof($array);$i++)
-                {
-                  ?>
-                  <option><?php echo $movie_name[$i]; ?></option>
-                  <?php
-                }
-
-                ?>
-                
-                </select>
-            </div>
-          </div>
-           <div class="row">
-            <div class="form-group col-md-6">
-              <label for="exampleInputEmail1">Enter Movie Time</label>
-              <input type="Time" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Movie Time" name="movietime">
-            </div>
-          </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label for="exampleInputEmail1">Enter Total Movie Sheet</label>
-              <input type="Number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Total Movie Sheet" name="movieseats">
-            </div>
-          </div>
-           <button type="submit" name="addtheater"  class="btn btn-primary">Add Theater</button>
-          <hr>
-             <div class="content-header">
-                <div class="container-fluid">
-                  <div class="row mb-2">
-                    <div class="col-sm-6">
-                      <h1 class="m-0">Import Excel File</h1>
-                    </div><!-- /.col -->
-                  </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-
-              <label for="exampleInputEmail1">SELECT EXCEL FILE</label>
-                <input type="file" name="excel" class="form-control">
-              </div>
-            </div>
-                <button type="submit" name="submit" class="btn btn-primary" >Import</button>
-      </form>
-          <?php 
+    <div class="row">
+       <form class="form-inline" action ="#" method="post" enctype="multipart/form-data">
+        <label>SELECT EXCEL FILE</label><br>
+          <input type="file" name="excel" class="form-control">
+          <input type="submit" name="submit" class="btn btn-light" value="IMPORT" style="background-color:#e83e8c; color:#ffff;">
+        </form>
+    </div>
+  </div>
+  <?php 
     if(isset($_FILES['excel']['name'])){
       $conn=mysqli_connect("localhost","root","root","ihub");
       include 'xlsx.php';
@@ -173,17 +98,6 @@
     }
   ?>
 
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021</strong>
-  </footer>
-</div>
-<!-- ./wrapper -->
-
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -218,5 +132,7 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
+
 </body>
 </html>
