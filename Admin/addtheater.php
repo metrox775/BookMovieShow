@@ -64,7 +64,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="form-group col-md-6">
               <label for="exampleInputEmail1">Enter Theater Name</label>
@@ -106,6 +106,24 @@
           </div>
            <button type="submit" name="addtheater"  class="btn btn-primary">Add Theater</button>
           </form>
+          <hr>
+           
+             <div class="content-header">
+                <div class="container-fluid">
+                  <div class="row mb-2">
+                    <div class="col-sm-6">
+                      <h1 class="m-0">Import Excel File</h1>
+                    </div><!-- /.col -->
+                  </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="exampleInputEmail1">SELECT EXCEL FILE</label>
+                <input type="file" name="excel" class="form-control">
+                <button type="submit" name="submit" class="btn btn-primary" >Import</button>
+          </div>
+
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
