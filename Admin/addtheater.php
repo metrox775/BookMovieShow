@@ -105,9 +105,7 @@
             </div>
           </div>
            <button type="submit" name="addtheater"  class="btn btn-primary">Add Theater</button>
-          </form>
           <hr>
-           
              <div class="content-header">
                 <div class="container-fluid">
                   <div class="row mb-2">
@@ -119,10 +117,61 @@
             </div>
           <div class="row">
             <div class="form-group col-md-6">
+
               <label for="exampleInputEmail1">SELECT EXCEL FILE</label>
                 <input type="file" name="excel" class="form-control">
+              </div>
+            </div>
                 <button type="submit" name="submit" class="btn btn-primary" >Import</button>
-          </div>
+      </form>
+          <?php 
+    if(isset($_FILES['excel']['name'])){
+      $conn=mysqli_connect("localhost","root","root","ihub");
+      include 'xlsx.php';
+      if($conn){
+        $excel = SimpleXLSX::parse($_FILES['excel']['tmp_name']);
+        echo "<pre>";
+        print_r($excel->dimension());
+        print_r($excel->sheetNames());
+        for($sheet=0; $sheet < sizeof($excel->sheetNames());$sheet++)
+        {
+          $rowcol=$excel->dimension($sheet);
+          $i=0;
+          if($rowcol[0]!=1 && $rowcol[1]!=1){
+          foreach ($excel->rows($sheet) as $key => $row) {
+            //print_r($row);
+            $q="";
+            foreach ($row as $key => $cell) {
+              //print_r($cell);
+              //echo "<br>";
+              if($i==0){
+                $q.=$cell." varchar(50),";
+              }else
+              {
+                $q.="'".$cell."',";
+              }
+            }
+            if($i==0){
+
+              $query="CREATE table ".$excel->sheetName($sheet)."(".rtrim($q,",").");";
+
+            }else
+            {
+              $query="INSERT INTO ".$excel->sheetName($sheet)." values(".rtrim($q,",").");";
+            }
+            echo $query;
+            if(mysqli_query($conn,$query))
+            {
+              echo "true";
+            }
+            echo"<br>";
+            $i++;
+            }
+          }
+        }
+      }
+    }
+  ?>
 
       </div><!-- /.container-fluid -->
     </section>
