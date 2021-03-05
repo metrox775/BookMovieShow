@@ -236,10 +236,10 @@ span.psw {
 
 
 		<!-- <div class="fh5co-listing"> -->
-			<div class="container">
+			<div class="container" >
 				<div class="row">
 				</div>
-				<div class="row col-md-12">
+				<div class="row col-md-12" style="margin-left: 20px;">
 					<div class="col-md-4 col-sm-4 fh5co-item-wrap">
 							<img src='Admin/<?php echo $movie_img[0]; ?>' class="img-responsive">
 					</div>
