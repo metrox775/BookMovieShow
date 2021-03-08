@@ -3,12 +3,8 @@ include 'Model.php';
 $md = new model();
 //$name =$_REQUEST['name'];
 
-  $desc = $md->fetchById($conn,$movieename,"Movie");
-  $theater= $md->theaterData($conn,$movieename,"Movie","theater");
-
-
-
-
+$desc = $md->fetchById($conn,$movieename,"Movie");
+$theater= $md->theaterData($conn,$movieename,"Movie","theater");
 
 $file_name = $file_size = $file_tmp = $file_type = $file_ext = $path =  "";
 
@@ -90,6 +86,7 @@ if(isset($_POST["submit"])) {
   $data = array("city_name" => $cityname);
   $md->insert($conn, $data, "city");
 }
+//Admin Login
 if(isset($_POST["login"]))
 { 
   $username = $_POST['username'];
@@ -97,8 +94,6 @@ if(isset($_POST["login"]))
 
   $data = array("username" => $username , "password" => $password);
   $md->login($conn,$data,"login");
-
-
 }
 //movie list showing
  $array = $md->showMovies($conn, "Movie");
@@ -169,10 +164,12 @@ if(isset($_POST["login"]))
     {
       
       $seat = $_POST['btnClickedValue'];
+      $selectedseats = $_POST['selectedseats'];
+      echo $selectedseats;
       $moviename = $_POST['moviename'];
       $theatername = $_POST['theatername'];
       $movietiming = $_POST['movietiming'];
-      $totalseat = $_POST['totalseat'];
+      $totalseats = $_POST['totalseats'];
 
 
        // echo $seat;
@@ -180,22 +177,25 @@ if(isset($_POST["login"]))
        // echo $theatername;
        // echo $movietiming;
 
-       $data = array("movie_name" => $moviename , "theater_name" => $theatername, "timing" => $movietiming,"username"=> $_SESSION["username"],"phone"=>152,"booking_seat"=>$seat,"total_seat"=>$totalseat);
+       $data = array("movie_name" => $moviename , "theater_name" => $theatername, "timing" => $movietiming,"username"=> $_SESSION["username"],"phone"=>152,"booking_seat"=>$seat,"total_seat"=>$totalseats,"selectedseats"=>$selectedseats);
 
       $bookData =  $md->insert($conn, $data, "booking_info");
-      // if($bookData != null)
-      // {
-      //     echo "<script>alert('Tickets are booked.');</script>";
-      // }  
-      // else{
+      if($bookData != null)
+      {
+          echo "<script>alert('Tickets are booked.');</script>";
+          header('location:viewbooking.php');
+      }  
+      else{
 
-      //   echo "<script>alert('Tickets are not booked.');</script>";
-      // }
-
+        echo "<script>alert('Tickets are not booked.');</script>";
+      }
     }
+
 
     //fetch city for userside 
     $fetchCity = $md->showMovies($conn, "city");
+    $user_name=$_SESSION["username"];
+    $tickets= $md->showticket($conn,$user_name,"booking_info");
 
 
 ?>

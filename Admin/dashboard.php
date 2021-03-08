@@ -1,6 +1,7 @@
 <?php
         // ini_set("display_errors", "1");
-        // error_reporting(E_ALL);
+        // session_start();
+
         include '../Database/Controller.php';
 
         $id = array_column($userdata, 'id');
@@ -53,6 +54,11 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <!--   <?php  echo $_SESSION["username"]; ?> -->
+            </div>
+        </div>
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">User Data</h1>

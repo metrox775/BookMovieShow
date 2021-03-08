@@ -34,12 +34,14 @@
 
             $q="SELECT * FROM $table  WHERE `username` = '$username' AND `password` = '$password' ";
             $res = $con->query($q);
-
             $num_rows = $res->fetchColumn();
-
+            // $res->fetchAll(PDO::FETCH_ASSOC);
             if($num_rows > 0)
             {
+                // session_start();
+                // $_SESSION["username"] = $res[0];
                 header('location:dashboard.php');
+
             }
             else{
                 echo "<script> alert('Username and password are incorrect');</script>";
@@ -49,6 +51,12 @@
         }
         function showMovies($con,$table){
             $q = "SELECT * FROM $table";
+            $res= $con->query($q);
+            $result = $res->fetchAll(PDO::FETCH_ASSOC);
+           return $result;
+        }
+        function showticket($con,$user,$table){
+            $q = "SELECT * FROM $table WHERE `username`='$user'";
             $res= $con->query($q);
             $result = $res->fetchAll(PDO::FETCH_ASSOC);
            return $result;

@@ -240,6 +240,11 @@ li.box {
       <center><div class="row">
         <div class="col-md-12">
           <input type="hidden" id="btnClickedValue" name="btnClickedValue" />
+          <input type="hidden" name="totalseats" id="totalseats" value=""> 
+          <input type="hidden" name="selectedseats" id="selectedseats">
+
+
+
           <input type="hidden" name="moviename" value="<?php echo $movie_name[0];?>" />
           <input type="hidden" name="theatername" value="<?php echo $theater_name[0];?>" />
           <input type="hidden" name="movietiming" value="<?php echo $movie_timing[0];?>" />
@@ -327,6 +332,13 @@ li.box {
     counter = counter + 1 ;
     alert (counter);
     alert ('"' + arr.join('", "') + '"');
+    var x = arr.toString();
+    console.log(x);
+    document.getElementById("selectedseats").value = x;
+    document.getElementById("totalseats").value = counter;
+
+
+
   });
 });
     
