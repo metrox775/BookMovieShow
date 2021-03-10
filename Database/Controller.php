@@ -183,13 +183,13 @@ if(isset($_POST["login"]))
       if($bookData != null)
       {
           echo "<script>alert('Tickets are booked.');</script>";
+
           header('location:viewbooking.php');
       }  
       else{
 
         echo "<script>alert('Tickets are not booked.');</script>";
       }
-    }
 
 
     //fetch city for userside 

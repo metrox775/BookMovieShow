@@ -263,7 +263,7 @@ li.box {
                   $j = $j+10; 
                 }
               ?>
-				          <li class="page-item" ><input type="hidden" id="tid"value="<?php echo $i; ?>"/><a class="page-link" href="#"><?php echo $i; ?></a></li>
+				          <li class="page-item" value="<?php echo $i; ?>"><a class="page-link" href="#"><?php echo $i; ?></a></li>
 
 			       <?php
              }
@@ -272,10 +272,9 @@ li.box {
 			</nav>
     </div>
        <div class="col-md-12">
-        <button type="submit" id="print" name="buyticket" class="btn btn-primary" style="background-color: #333;">Buy Ticket</button>
+        <button type="submit" name="buyticket" class="btn btn-primary" style="background-color: #333;">Buy Ticket</button>
          <div>
       </div></center>
-      <p id = "GFG_DOWN"></p>
     </div>
 
     
@@ -315,7 +314,7 @@ li.box {
 
      var value = $(this).attr('value');
      document.getElementById("btnClickedValue").value = value;
-      
+      $('li').removeClass('active');
       $(this).addClass('active');
       
      });
@@ -341,8 +340,7 @@ li.box {
 
   });
 });
-    
-   
+
   </script>
   </body>
 </html>
