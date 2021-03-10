@@ -126,7 +126,7 @@
       </form>
           <?php 
     if(isset($_FILES['excel']['name'])){
-      $conn=mysqli_connect("localhost","root","root","ihub");
+      // $conn=mysqli_connect("localhost","root","root","ihub");
       include 'xlsx.php';
       if($conn){
         $excel = SimpleXLSX::parse($_FILES['excel']['tmp_name']);
@@ -146,9 +146,11 @@
               //echo "<br>";
               if($i==0){
                 $q.=$cell." varchar(50),";
+                print_r($q);
               }else
               {
                 $q.="'".$cell."',";
+                print_r($q);
               }
             }
             if($i==0){
@@ -158,9 +160,10 @@
             }else
             {
               $query="INSERT INTO ".$excel->sheetName($sheet)." values(".rtrim($q,",").");";
+
             }
             echo $query;
-            if(mysqli_query($conn,$query))
+            if($conn->query($query))
             {
               echo "true";
             }
